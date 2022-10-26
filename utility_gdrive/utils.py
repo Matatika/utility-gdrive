@@ -55,6 +55,6 @@ def download_file_data(service, file_id):
     done = False
     while done is False:
         status, done = downloader.next_chunk()
-        print(F'Downloading {file_name} {int(status.progress() * 100)}.')
+        print(F'Downloading {file_name["name"]} {int(status.progress() * 100)}.')
 
     return file.getvalue(), file_name["name"]
