@@ -1,0 +1,80 @@
+"""CLI entrypoint 'utility-gdrive' command"""
+
+import click
+import os
+
+from pathlib import Path
+from utility_gdrive.utils import download_file
+from google.oauth2.credentials import Credentials
+
+
+@click.command()
+@click.argument(
+    "file_id",
+    type=click.STRING,
+    default=os.getenv("UTILITY_GDRIVE_FILE_ID")
+)
+@click.option(
+    "-output_path",
+    type=click.STRING,
+    default=os.getenv("UTILITY_GDRIVE_OUTPUT_PATH"),
+    help="Output path for files, default is utility-gdrive is being invoked. Environment variable: UTILITY_GDRIVE_OUTPUT_PATH"
+)
+@click.option(
+    "-client_id",
+    type=click.STRING,
+    default=os.getenv("UTILITY_GDRIVE_CLIENT_ID"),
+    help="Google client id. Environment variable: UTILITY_GDRIVE_CLIENT_ID"
+)
+@click.option(
+    "-client_secret",
+    type=click.STRING,
+    default=os.getenv("UTILITY_GDRIVE_CLIENT_SECRET"),
+    help="Google client secret. Environment variable: UTILITY_GDRIVE_CLIENT_SECRET"
+)
+@click.option(
+    "-access_token",
+    type=click.STRING,
+    default=os.getenv("UTILITY_GDRIVE_ACCESS_TOKEN"),
+    help="Google access token. Environment variable: UTILITY_GDRIVE_ACCESS_TOKEN"
+)
+@click.option(
+    "-refresh_token",
+    type=click.STRING,
+    default=os.getenv("UTILITY_GDRIVE_REFRESH_TOKEN"),
+    help="Google refresh token. Environment variable: UTILITY_GDRIVE_REFRESH_TOKEN"
+)
+def root(file_id, output_path, client_id, client_secret, access_token, refresh_token):
+    """This command takes a G-Drive file or folder id.
+    
+    Environment variable: UTILITY_GDRIVE_FILE_ID"""
+
+    if not client_id or not client_secret or not access_token or not refresh_token:
+        if not client_id:
+            click.secho("Missing google client id.", fg="yellow")
+        if not client_secret:
+            click.secho("Missing google client secret.", fg="yellow")
+        if not access_token:
+            click.secho("Missing google access token.", fg="red")
+        if not refresh_token:
+            click.secho("Missing google refresh token.", fg="red")
+
+
+    creds = Credentials(
+        access_token or '',
+        refresh_token=refresh_token or None,
+        token_uri='https://oauth2.googleapis.com/token',
+        client_id=client_id or None,
+        client_secret=client_secret or None
+    )
+
+    files = download_file(file_id, creds)
+    file_name = None
+    
+    for k, v in files.items():
+        if output_path:
+            if output_path[-1] != "/":
+                output_path = output_path + "/"
+            file_name = Path(output_path + k)
+        with open(file_name or k, "wb") as f:
+            f.write(v)
