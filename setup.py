@@ -11,7 +11,7 @@ setup(
     url="https://www.matatika.com/",
     entry_points="""
         [console_scripts]
-        utility-gdrive=utility_gdrive.cli.commands.root:root
+        gdrive=utility_gdrive.cli.commands.root:root
     """,
     license="MIT",
     install_requires=required,
