@@ -4,6 +4,7 @@ import click
 import os
 
 from pathlib import Path
+from utility_gdrive.auth import proxy_refresh_handler
 from utility_gdrive.utils import download_file
 from google.oauth2.credentials import Credentials
 
@@ -60,13 +61,22 @@ def root(file_id, output_path, client_id, client_secret, access_token, refresh_t
             click.secho("Missing google refresh token.", fg="red")
 
 
-    creds = Credentials(
-        access_token or '',
-        refresh_token=refresh_token or None,
-        token_uri='https://oauth2.googleapis.com/token',
-        client_id=client_id or None,
-        client_secret=client_secret or None
-    )
+    if os.getenv("GDRIVE_OAUTH_CREDENTIALS_REFRESH_PROXY_URL") and \
+        os.getenv("GDRIVE_OAUTH_CREDENTIALS_REFRESH_PROXY_URL_AUTH") and \
+        os.getenv("GDRIVE_OAUTH_CREDENTIALS_REFRESH_TOKEN") and \
+        os.getenv("GDRIVE_OAUTH_CREDENTIALS_ACCESS_TOKEN"):
+        creds = Credentials(
+            access_token,
+            refresh_handler=proxy_refresh_handler
+        )
+    else:
+        creds = Credentials(
+            access_token or '',
+            refresh_token=refresh_token,
+            token_uri='https://oauth2.googleapis.com/token',
+            client_id=client_id,
+            client_secret=client_secret
+        )
 
     files = download_file(file_id, creds)
     file_name = None
