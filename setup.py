@@ -13,7 +13,7 @@ setup(
         [console_scripts]
         gdrive=utility_gdrive.cli.commands.root:root
     """,
-    license="MIT",
+    license="AGPL-3.0",
     install_requires=required,
     packages=find_packages(exclude=("tests")),
     include_package_data=True,
