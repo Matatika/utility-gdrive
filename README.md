@@ -18,12 +18,12 @@ Valid settings to run the gdrive package:
 
 | **Setting** | **Required** | **Providing Settings Inline or Environment Variable** |
 | ----------- | ------------ | --------------------- |
-`access_token` | true | Inline: `-access_token=` or Environment Variable: `UTILITY_GDRIVE_ACCESS_TOKEN`
-`path` | true | When calling the package: `gdrive path/to/file_or_folder` or Environment Variable: `UTILITY_GDRIVE_FILE_ID`
-`client_id` | false | Inline: `-client_id=` or Environment Variable: `UTILITY_GDRIVE_CLIENT_ID`
-`client_secret` | false | Inline: `-client_secret=` or Environment Variable: `UTILITY_GDRIVE_CLIENT_SECRET`
-`refresh_token` | false | Inline: `-refresh_token=` or Environment Variable: `UTILITY_GDRIVE_REFRESH_TOKEN`
-`output_path` | false | Inline: `-output_path=` or Environment Variable: `UTILITY_GDRIVE_OUTPUT_PATH`
+`access_token` | true | Inline: `-access_token=` or Environment Variable: `GDRIVE_ACCESS_TOKEN`
+`path` | true | When calling the package: `gdrive path/to/file_or_folder` or Environment Variable: `GDRIVE_FILE_ID`
+`client_id` | false | Inline: `-client_id=` or Environment Variable: `GDRIVE_CLIENT_ID`
+`client_secret` | false | Inline: `-client_secret=` or Environment Variable: `GDRIVE_CLIENT_SECRET`
+`refresh_token` | false | Inline: `-refresh_token=` or Environment Variable: `GDRIVE_REFRESH_TOKEN`
+`output_path` | false | Inline: `-output_path=` or Environment Variable: `GDRIVE_OUTPUT_PATH`
 
 
 ### Command Examples

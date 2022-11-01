@@ -13,42 +13,42 @@ from google.oauth2.credentials import Credentials
 @click.argument(
     "file_id",
     type=click.STRING,
-    default=os.getenv("UTILITY_GDRIVE_FILE_ID")
+    default=os.getenv("GDRIVE_FILE_ID")
 )
 @click.option(
     "-output_path",
     type=click.STRING,
-    default=os.getenv("UTILITY_GDRIVE_OUTPUT_PATH"),
-    help="Output path for files, default is utility-gdrive is being invoked. Environment variable: UTILITY_GDRIVE_OUTPUT_PATH"
+    default=os.getenv("GDRIVE_OUTPUT_PATH"),
+    help="Output path for files, default is utility-gdrive is being invoked. Environment variable: GDRIVE_OUTPUT_PATH"
 )
 @click.option(
     "-client_id",
     type=click.STRING,
-    default=os.getenv("UTILITY_GDRIVE_CLIENT_ID"),
-    help="Google client id. Environment variable: UTILITY_GDRIVE_CLIENT_ID"
+    default=os.getenv("GDRIVE_CLIENT_ID"),
+    help="Google client id. Environment variable: GDRIVE_CLIENT_ID"
 )
 @click.option(
     "-client_secret",
     type=click.STRING,
-    default=os.getenv("UTILITY_GDRIVE_CLIENT_SECRET"),
-    help="Google client secret. Environment variable: UTILITY_GDRIVE_CLIENT_SECRET"
+    default=os.getenv("GDRIVE_CLIENT_SECRET"),
+    help="Google client secret. Environment variable: GDRIVE_CLIENT_SECRET"
 )
 @click.option(
     "-access_token",
     type=click.STRING,
-    default=os.getenv("UTILITY_GDRIVE_ACCESS_TOKEN"),
-    help="Google access token. Environment variable: UTILITY_GDRIVE_ACCESS_TOKEN"
+    default=os.getenv("GDRIVE_ACCESS_TOKEN"),
+    help="Google access token. Environment variable: GDRIVE_ACCESS_TOKEN"
 )
 @click.option(
     "-refresh_token",
     type=click.STRING,
-    default=os.getenv("UTILITY_GDRIVE_REFRESH_TOKEN"),
-    help="Google refresh token. Environment variable: UTILITY_GDRIVE_REFRESH_TOKEN"
+    default=os.getenv("GDRIVE_REFRESH_TOKEN"),
+    help="Google refresh token. Environment variable: GDRIVE_REFRESH_TOKEN"
 )
 def root(file_id, output_path, client_id, client_secret, access_token, refresh_token):
     """This command takes a G-Drive file or folder id.
     
-    Environment variable: UTILITY_GDRIVE_FILE_ID"""
+    Environment variable: GDRIVE_FILE_ID"""
 
     if not client_id or not client_secret or not access_token or not refresh_token:
         if not client_id:
