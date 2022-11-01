@@ -1,11 +1,11 @@
 <a href="https://github.com/Matatika/utility-gdrive/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/Matatika/utility-gdrive"></a>
 
-## utility-gdrive
+## gdrive
 Current Status: In development
 
 Python package for downloading Google Drive files.
 
-With utility-gdrive you can download a file or a folder of files (currently only the top level files, no sub-folders) with google authentication. Currently google own file types are not supported, support for this is on the roadmap.
+With gdrive you can download a file or a folder of files (currently only the top level files, no sub-folders) with google authentication. Currently google own file types are not supported, support for this is on the roadmap.
 
 
 ### Settings
